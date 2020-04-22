@@ -1,0 +1,35 @@
+
+    1. Write a CREATE TABLE statement for the Customer table. Choose data types appropriate for the DBMS used in your course. All columns are required (not null).
+
+    Query:
+
+    create  table Customer(custno int Primary key, 
+    					   custname varchar(15) not null,
+    					   address varchar(15) not null,
+    					   Internal char(1) not null,
+    					   contact varchar(15) not null, 
+    					   phone bigint not null,
+    					   city varchar(15) not null,
+    					   state char(2) not null,
+    					   zip int not null);
+
+2.Write a CREATE TABLE statement for the Facility table. Choose data types appropriate for the DBMS used in your course. All columns are required (not null).
+
+Query:
+
+create table Facility(facno int Primary key,
+     					facname varchar(15) not null);
+
+
+3.Write a CREATE TABLE statement for the Location table. Choose data types appropriate for the DBMS used in your course. LocName column is required (not null).
+
+Query:
+
+ create table Location(locno int Primary key, 
+ 					   facno int, locname varchar(15) not null , 
+ 					   Constraint fk Foreign key (facno) references Facility(facno));
+
+ 4. Identify the foreign key(s) and 1-M relationship(s) among the Customer, Facility, and Location tables. For each relationship, identify the parent table and the child table.
+
+ 	==>There is one foreign key in Location table (facno) that references primary key of Facility;
+ 	==>Also one 1-many relationship i.e one facility can book multiple locations.

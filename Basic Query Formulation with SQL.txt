@@ -1,0 +1,60 @@
+1.List the customer number, the name, the phone number, and the city of customers.
+
+query:
+
+SELECT custno,custname,phone,city from Customer.
+
+2.List the customer number, the name, the phone number, and the city of customers who reside in Colorado (State is CO).
+
+query:
+
+SELECT custno,custname,phone,city from Customer where state='CO';
+
+3.List all columns of the EventRequest table for events costing more than $4000.  Order the result by the event date (DateHeld).
+
+query:
+
+select * from EventRequest
+where estcost>4000
+order by (dateheld);
+
+4.List the event number, the event date (DateHeld), and the estimated audience number with approved status and audience greater than 9000 or with pending status and audience greater than 7000.
+
+query:
+
+  SELECT EventNo, DateHeld, Status, EstAudience
+  FROM EventRequest
+  WHERE (Status = 'Approved' AND EstAudience > 9000) 
+     OR (Status = 'Pending' AND EstAudience > 7000);
+
+5.List the event number, event date (DateHeld), customer number and customer name of events placed in January 2018 by customers from Boulder.
+
+query:
+
+SELECT  EventNo, DateHeld, Customer.CustNo, CustName
+  FROM  EventRequest INNER JOIN Customer 
+        ON  EventRequest.CustNo = Customer.CustNo
+  WHERE  City = 'Boulder' 
+         AND DateHeld BETWEEN '2018-12-01'AND '2018-12-31';
+
+6.List the average number of resources used (NumberFld) by plan number. Include only location number L100.
+
+query:
+
+SELECT Avg(NumberFld) as AVG
+from EventPlanLine
+where LocNO=L100
+group by PlanNo
+
+7.List the average number of resources used (NumberFld) by plan number. Only include location number L100. Eliminate plans with less than two event lines containing location number L100.
+
+query:
+
+SELECT PlanNo, AVG(NumberFld) AS AvgNumResources, 
+               COUNT(*) AS NumEventLines
+  FROM EventPlanLine
+  WHERE LocNo = 'L100'
+  GROUP BY PlanNo
+  HAVING COUNT(*) > 1;
+
+
